@@ -1,15 +1,14 @@
-package mx.uv.back_ferreteria;
+package mx.uv.back_ferreteria.Modelo;
+
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Direccion {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String ciudad;
     private String colonia;
     private String calle;
