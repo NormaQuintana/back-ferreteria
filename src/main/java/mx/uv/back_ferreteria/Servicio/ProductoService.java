@@ -27,18 +27,16 @@ public class ProductoService {
 
     public Producto agregarProducto(Producto producto) {
         String idPersona = producto.getPersona().getId();
-        System.out.println("ID Persona recibido: " + idPersona);  // Log para verificar el idPersona
+        System.out.println("ID Persona recibido: " + idPersona); 
     
-        // Buscamos la persona en la base de datos usando el idPersona
         Optional<Persona> personaOpt = personaRepository.findById(idPersona);
     
         if (personaOpt.isPresent()) {
-            producto.setPersona(personaOpt.get()); // Asignamos la persona encontrada
+            producto.setPersona(personaOpt.get());
         } else {
             throw new RuntimeException("Proveedor con ID " + idPersona + " no encontrado");
         }
     
-        // Asignamos el estado del producto
         producto.setEstado("Disponible");
         producto.setCodigo(producto.getIdProducto().replace("-", ""));
         return productoRepository.save(producto);

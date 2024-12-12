@@ -26,7 +26,6 @@ public class ControladorProveedor {
     @Autowired
     private PersonaService personaService;
 
-    // Método para agregar una nuevo proveedor
     @PostMapping("/agregar")
     public ResponseEntity<String> agregarProveedor(@RequestBody Persona persona) {
         boolean result = personaService.agregarProveedor(persona);
@@ -50,7 +49,6 @@ public class ControladorProveedor {
         }
     }
 
-    // Método para obtener una persona por su ID
     @GetMapping("/obtener/{id}")
     public ResponseEntity<Persona> obtenerPersona(@PathVariable String id) {
         Persona persona = personaService.obtenerPersonaById(id);
@@ -63,14 +61,10 @@ public class ControladorProveedor {
 
     @GetMapping("/obtener-todas")
     public List<Persona> obtenerPersonasPorRol() {
-    // Este es el UUID fijo para el rol "proveedor"
     UUID idRolProveedor = UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe");
     return personaService.obtenerPersonasPorIdRol(idRolProveedor);
     }
 
-
-
-    // Método para eliminar (inactivar) una persona por su ID
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         boolean result = personaService.eliminarPersona(id);

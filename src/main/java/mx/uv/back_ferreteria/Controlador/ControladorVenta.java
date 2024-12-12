@@ -29,9 +29,9 @@ public class ControladorVenta {
         List<Venta> ventas = ventaService.obtenerTodasLasVentasDiarias();
         
         if (ventas.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Si no hay direcciones, devuelve 204 No Content
+            return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(ventas); // Si hay direcciones, devuelve 200 OK con la lista de direcciones
+            return ResponseEntity.ok(ventas); 
         }
     }
 
