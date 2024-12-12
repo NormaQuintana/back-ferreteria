@@ -25,27 +25,21 @@ public class VentaService {
     }
 
     public Venta agregarVenta(Venta venta) {
-        // Obtener el ID del usuario desde la venta
         String idUsuario = venta.getUsuario().getIdUsuario();
 
-        // Buscar el usuario en la base de datos
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
 
         if (usuarioOpt.isPresent()) {
-            // Establecer el usuario encontrado en la venta
             venta.setUsuario(usuarioOpt.get());
         } else {
-            // Si no existe el usuario, lanza una excepción o maneja el error
             throw new RuntimeException("Usuario con ID " + idUsuario + " no encontrado");
         }
-
-        // Guardar la venta con el usuario asociado
         venta.setFecha(LocalDate.now());
         return ventaRepository.save(venta);
     }
 
     public List<Venta> obtenerTodasLasVentasDiarias() {
-        LocalDate hoy = LocalDate.now(); // Obtener la fecha actual
+        LocalDate hoy = LocalDate.now();
         return ventaRepository.findByFecha(hoy);
     }
 }

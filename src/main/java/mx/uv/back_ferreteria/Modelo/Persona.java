@@ -22,9 +22,9 @@ public class Persona {
     private String estado;
     private UUID idRol;
 
-    @OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
-    @JoinColumn(name = "direccion_id") // Nombre de la columna que guarda el id de Dirección
-    private Direccion direccion; //relacion 1 a 1
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "direccion_id") 
+    private Direccion direccion;
 
     public Persona() {
     }
