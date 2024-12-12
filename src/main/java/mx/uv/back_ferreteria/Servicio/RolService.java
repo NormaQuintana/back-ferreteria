@@ -28,7 +28,7 @@ public class RolService {
             rolRepository.save(new Rol(UUID.fromString("1c5b795a-3d41-4c3d-b10e-92c14a7f52f3"), "Gerente"));
         }
         if (!rolRepository.existsById(UUID.fromString("2c5a595e-7b49-4b2f-ae42-b62bb1df5037"))) {
-            rolRepository.save(new Rol(UUID.fromString("2c5a595e-7b49-4b2f-ae42-b62bb1df5037"), "Cliente"));
+            rolRepository.save(new Rol(UUID.fromString("2c5a595e-7b49-4b2f-ae42-b62bb1df5037"), "Encargado de Proyecto"));
         }
     }
 }
