@@ -16,9 +16,9 @@ public class Venta {
     @Id
     private String idVenta = UUID.randomUUID().toString();
 
-    @OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
-    @JsonIgnoreProperties("ventas") // Ignorar otros detalles de Usuario
+    @JsonIgnoreProperties("ventas") 
     private Usuario usuario;
 
     private float cantidad;

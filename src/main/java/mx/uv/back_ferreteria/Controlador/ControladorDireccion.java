@@ -43,9 +43,9 @@ public class ControladorDireccion {
         List<Direccion> direcciones = direccionService.obtenerTodasLasDirecciones();
         
         if (direcciones.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Si no hay direcciones, devuelve 204 No Content
+            return ResponseEntity.noContent().build(); 
         } else {
-            return ResponseEntity.ok(direcciones); // Si hay direcciones, devuelve 200 OK con la lista de direcciones
+            return ResponseEntity.ok(direcciones); 
         }
     }
 }

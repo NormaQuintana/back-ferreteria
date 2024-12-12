@@ -1,7 +1,6 @@
 package mx.uv.back_ferreteria.Controlador;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.uv.back_ferreteria.Modelo.Persona;
@@ -24,7 +23,6 @@ public class ControladorPersona {
     @Autowired
     private PersonaService personaService;
 
-    // Método para agregar una nueva persona
     @PostMapping("/agregar")
     public ResponseEntity<String> agregarPersona(@RequestBody Persona persona) {
         boolean result = personaService.agregarPersona(persona);
@@ -48,7 +46,6 @@ public class ControladorPersona {
         }
     }
 
-    // Método para obtener una persona por su ID
     @GetMapping("/obtener/{id}")
     public ResponseEntity<Persona> obtenerPersona(@PathVariable String id) {
         Persona persona = personaService.obtenerPersonaById(id);
@@ -70,7 +67,6 @@ public class ControladorPersona {
         }
     }
 
-    // Método para eliminar (inactivar) una persona por su ID
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         boolean result = personaService.eliminarPersona(id);

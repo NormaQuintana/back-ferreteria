@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Usuario;
-import mx.uv.back_ferreteria.Repository.PersonaRepository;
-import mx.uv.back_ferreteria.Repository.UsuarioRepository;
 import mx.uv.back_ferreteria.Servicio.UsuarioService;
 
 @RestController
@@ -28,12 +26,6 @@ public class ControladorUsuario {
 
     @Autowired
     private final UsuarioService usuarioService;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private PersonaRepository personaRepository;
 
     @Autowired
     public ControladorUsuario(UsuarioService usuarioService) {

@@ -17,25 +17,23 @@ public class PersonaService {
     private PersonaRepository personaRepository;
 
     @Autowired
-    private DireccionRepository direccionRepository; // Para guardar la dirección
+    private DireccionRepository direccionRepository; 
+
 
 
     public boolean agregarPersona(Persona persona) {
 
-        // Verificar si la persona ya existe por nombre, correo y RFC
         if (personaRepository.existsByNombreAndCorreoAndRfc(persona.getNombre(), persona.getCorreo(), persona.getRfc())) {
             return false; 
         }
 
-        Direccion direccion = persona.getDireccion(); // Obtener la dirección de la persona
-        direccionRepository.save(direccion); // Guardar la dirección en la tabla DIRECCION
+        Direccion direccion = persona.getDireccion(); 
+        direccionRepository.save(direccion); 
 
-        // Asignar la dirección recién guardada a la persona
         persona.setDireccion(direccion);
         persona.setEstado("Disponible");
-        // Guardar la persona
         personaRepository.save(persona);
-        return true; // Persona guardada con éxito
+        return true;
     }
 
     public boolean editarPersona(Persona persona) {
@@ -49,18 +47,15 @@ public class PersonaService {
             return false;
         }
 
-        // Modificar los datos de la persona con los nuevos valores
         personaExistente.setNombre(persona.getNombre());
         personaExistente.setTelefono(persona.getTelefono());
         personaExistente.setCorreo(persona.getCorreo());
         personaExistente.setRfc(persona.getRfc());
-        //personaExistente.setIdRol(persona.getIdRol());
-        personaExistente.setDireccion(persona.getDireccion()); // Si deseas modificar la dirección
-        personaExistente.setEstado(persona.getEstado() != null ? persona.getEstado() : "Disponible"); // Si el estado no se pasa, dejar "Disponible"
+        personaExistente.setDireccion(persona.getDireccion());
+        personaExistente.setEstado(persona.getEstado() != null ? persona.getEstado() : "Disponible"); 
     
-        // Guardar la persona con los cambios
         personaRepository.save(personaExistente);
-        return true; // Persona editada con éxito
+        return true; 
     }
 
     public Persona obtenerPersonaById(String id) {
@@ -72,12 +67,10 @@ public class PersonaService {
     }
 
     public boolean eliminarPersona(String id) {
-        // Verificar si la persona existe
         if (!personaRepository.existsById(id)) {
             return false;
         }
 
-        // Cambiar el estado a 'Inactivo'
         Persona persona = personaRepository.findById(id).get();
         persona.setEstado("Inactivo");
         personaRepository.save(persona);
@@ -85,24 +78,20 @@ public class PersonaService {
     }
 
     public boolean agregarProveedor(Persona persona) {
-        // Verificar si la persona ya existe por nombre, correo y RFC
         if (personaRepository.existsByNombreAndCorreoAndRfc(persona.getNombre(), persona.getCorreo(), persona.getRfc())) {
             return false; 
         }
 
-        // Asignar el idRol para proveedor como un UUID
-        persona.setIdRol(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe")); // ID de proveedor como UUID
+        persona.setIdRol(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe")); 
 
-        Direccion direccion = persona.getDireccion(); // Obtener la dirección de la persona
-        direccionRepository.save(direccion); // Guardar la dirección en la tabla DIRECCION
+        Direccion direccion = persona.getDireccion(); 
+        direccionRepository.save(direccion); 
 
-        // Asignar la dirección recién guardada a la persona
         persona.setDireccion(direccion);
         persona.setEstado("Disponible");
 
-        // Guardar la persona (proveedor)
         personaRepository.save(persona);
-        return true; // Proveedor guardado con éxito
+        return true; 
     }
 
     public List<Persona> obtenerPersonasPorIdRol(UUID idRol) {

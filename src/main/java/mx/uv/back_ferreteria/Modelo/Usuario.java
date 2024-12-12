@@ -14,8 +14,8 @@ public class Usuario {
     @Id
     private String idUsuario = UUID.randomUUID().toString();
 
-    @OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
-    @JoinColumn(name = "persona_id") // Enlace con Persona
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "persona_id") 
     private Persona persona;
 
     private String usuario;
