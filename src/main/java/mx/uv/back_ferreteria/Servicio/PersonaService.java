@@ -56,6 +56,7 @@ public class PersonaService {
         personaExistente.setTelefono(persona.getTelefono());
         personaExistente.setCorreo(persona.getCorreo());
         personaExistente.setRfc(persona.getRfc());
+        personaExistente.setIdRol(persona.getIdRol());
         personaExistente.setDireccion(persona.getDireccion()); // Si deseas modificar la dirección
         personaExistente.setEstado(persona.getEstado() != null ? persona.getEstado() : "Disponible"); // Si el estado no se pasa, dejar "Disponible"
     
