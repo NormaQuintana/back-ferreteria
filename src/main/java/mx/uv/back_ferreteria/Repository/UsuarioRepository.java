@@ -2,7 +2,6 @@ package mx.uv.back_ferreteria.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,4 +30,3 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
         int eliminarUsuario(@Param("idUsuario") String idUsuario);
     
 }
-
