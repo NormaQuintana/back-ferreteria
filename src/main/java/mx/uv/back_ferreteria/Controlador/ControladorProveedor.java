@@ -1,5 +1,6 @@
 package mx.uv.back_ferreteria.Controlador;
 
+
 import java.util.List;
 import java.util.UUID;
 
@@ -12,38 +13,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
-@RequestMapping("/personas")
-public class ControladorPersona {
+@RequestMapping("/proveedores")
+public class ControladorProveedor {
+
+
     @Autowired
     private PersonaService personaService;
 
-    // Método para agregar una nueva persona
+    // Método para agregar una nuevo proveedor
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarPersona(@RequestBody Persona persona) {
-        boolean result = personaService.agregarPersona(persona);
+    public ResponseEntity<String> agregarProveedor(@RequestBody Persona persona) {
+        boolean result = personaService.agregarProveedor(persona);
         if (result) {
-            return ResponseEntity.ok("Persona agregada con éxito.");
+            return ResponseEntity.ok("Proveedor agregado con éxito.");
         } else {
-            return ResponseEntity.status(400).body("Error: Persona ya existe.");
+            return ResponseEntity.status(400).body("Error: Proveedor ya existe.");
         }
     }
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> editarPersona(@PathVariable String id, @RequestBody Persona persona) {
-    System.out.println("Persona recibida: " + persona);
+    public ResponseEntity<String> editarPersona(@RequestBody Persona persona) {
+    System.out.println("Proveedor recibida: " + persona);
     System.out.println("Direccion recibida: " + persona.getDireccion());
     
         boolean result = personaService.editarPersona(persona);
         if (result) {
-            return ResponseEntity.ok("Persona editada con éxito.");
+            return ResponseEntity.ok("Proveedor editada con éxito.");
         } else {
             return ResponseEntity.status(404).body("Error: Persona no encontrada.");
         }
@@ -61,15 +62,13 @@ public class ControladorPersona {
     }
 
     @GetMapping("/obtener-todas")
-    public ResponseEntity<List<Persona>> obtenerTodasLasPersonas() {
-        List<Persona> personas = personaService.obtenerTodasLasPersonas();
-        
-        if (personas.isEmpty()) {
-            return ResponseEntity.noContent().build(); 
-        } else {
-            return ResponseEntity.ok(personas); 
-        }
+    public List<Persona> obtenerPersonasPorRol() {
+    // Este es el UUID fijo para el rol "proveedor"
+    UUID idRolProveedor = UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe");
+    return personaService.obtenerPersonasPorIdRol(idRolProveedor);
     }
+
+
 
     // Método para eliminar (inactivar) una persona por su ID
     @DeleteMapping("/eliminar/{id}")
@@ -81,4 +80,4 @@ public class ControladorPersona {
             return ResponseEntity.status(404).body("Error: Persona no encontrada.");
         }
     }
-}
+}   

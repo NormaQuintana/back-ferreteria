@@ -22,7 +22,7 @@ public class RolService {
             rolRepository.save(new Rol(UUID.fromString("a56f7c83-2b5f-4019-b73c-9f6f96c25123"), "Vendedor"));
         }
         if (!rolRepository.existsById(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe"))) {
-            rolRepository.save(new Rol(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe"), "Supervisor"));
+            rolRepository.save(new Rol(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe"), "Proveedor"));
         }
         if (!rolRepository.existsById(UUID.fromString("1c5b795a-3d41-4c3d-b10e-92c14a7f52f3"))) {
             rolRepository.save(new Rol(UUID.fromString("1c5b795a-3d41-4c3d-b10e-92c14a7f52f3"), "Gerente"));
