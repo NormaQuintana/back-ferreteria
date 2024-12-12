@@ -35,17 +35,17 @@ public class ControladorPersona {
     }
 
     @PutMapping("/editar/{id}")
-public ResponseEntity<String> editarPersona(@RequestBody Persona persona) {
+    public ResponseEntity<String> editarPersona(@RequestBody Persona persona) {
     System.out.println("Persona recibida: " + persona);
     System.out.println("Direccion recibida: " + persona.getDireccion());
     
-    boolean result = personaService.editarPersona(persona);
-    if (result) {
-        return ResponseEntity.ok("Persona editada con éxito.");
-    } else {
-        return ResponseEntity.status(404).body("Error: Persona no encontrada.");
+        boolean result = personaService.editarPersona(persona);
+        if (result) {
+            return ResponseEntity.ok("Persona editada con éxito.");
+        } else {
+            return ResponseEntity.status(404).body("Error: Persona no encontrada.");
+        }
     }
-}
 
     // Método para obtener una persona por su ID
     @GetMapping("/obtener/{id}")

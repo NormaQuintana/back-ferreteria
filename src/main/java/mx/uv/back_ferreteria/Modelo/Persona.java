@@ -7,11 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Persona {
     @Id
     private String id = UUID.randomUUID().toString();
+    private String id_persona = id;
     
     private String nombre;
     private String telefono;
@@ -27,12 +29,27 @@ public class Persona {
     public Persona() {
     }
 
+    @PrePersist
+    public void prePersist() {
+        if (this.id == null) {
+            this.id = UUID.randomUUID().toString();
+        }
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdPersona() {
+        return id_persona;
+    }
+
+    public void setIdPersona(String id) {
+        this.id = id_persona;
     }
 
     public Direccion getDireccion() {
