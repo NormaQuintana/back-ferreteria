@@ -2,7 +2,6 @@ package mx.uv.back_ferreteria.Servicio;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,8 +49,12 @@ public class UsuarioService {
     }
 
     // Obtener usuario por ID (sin cambios)
-    public Usuario obtenerUsuarioById(UUID id) {
+    public Usuario obtenerUsuarioById(String id) {
         return usuarioRepository.findById(id).orElse(null);
+    }
+
+    public List<Usuario> obtenerTodasLosU() {
+        return usuarioRepository.findAll();
     }
 
     @Transactional

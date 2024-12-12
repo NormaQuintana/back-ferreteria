@@ -2,7 +2,6 @@ package mx.uv.back_ferreteria.Controlador;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,11 +45,6 @@ public class ControladorUsuario {
         return usuarioValidado.isPresent() ? ResponseEntity.ok(usuarioValidado) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
     }
 
-    @GetMapping
-    public ResponseEntity<List<Usuario>> obtenerUsuariosActivos() {
-        return ResponseEntity.ok(usuarioService.obtenerUsuariosActivos());
-    }
-
     @PutMapping("/cambiarContrasena")
     public ResponseEntity<String> cambiarContrasena(@RequestParam String correo, @RequestParam String nuevaContrasena) {
         return ResponseEntity.ok(usuarioService.cambiarContrasena(correo, nuevaContrasena));
@@ -68,6 +62,16 @@ public class ControladorUsuario {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCreado);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-todas")
+    public ResponseEntity<List<Usuario>> obtenerTodasLasPersonas() {
+        List<Usuario> usuarios = usuarioService.obtenerUsuariosActivos();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        } else {
+            return ResponseEntity.ok(usuarios); 
         }
     }
 }

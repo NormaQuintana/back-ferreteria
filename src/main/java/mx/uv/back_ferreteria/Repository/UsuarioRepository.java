@@ -2,7 +2,6 @@ package mx.uv.back_ferreteria.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,12 +11,12 @@ import org.springframework.data.repository.query.Param;
 import jakarta.transaction.Transactional;
 import mx.uv.back_ferreteria.Modelo.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
+public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
         @Query("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.contrasena = :contrasena")
         Optional<Usuario> validarCredenciales(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
     
-        @Query("SELECT u FROM Usuario u WHERE u.estado = 'Activo'")
+        @Query("SELECT u FROM Usuario u WHERE u.estado = 'Disponible'")
         List<Usuario> findUsuariosActivos();
     
         @Modifying
@@ -31,4 +30,3 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
         int eliminarUsuario(@Param("idUsuario") String idUsuario);
     
 }
-
