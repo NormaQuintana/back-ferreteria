@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.uv.back_ferreteria.Modelo.Proyecto;
-import mx.uv.back_ferreteria.Repository.ProyectoService;
+import mx.uv.back_ferreteria.Servicio.ProyectoService;
 
 @RestController
 @RequestMapping("/proyectos")
@@ -23,7 +23,6 @@ public class ControladorProyecto {
     @Autowired
     private ProyectoService proyectoService;
 
-    // Agregar proyecto
     @PostMapping("/agregar")
     public ResponseEntity<String> agregarProyecto(@RequestBody Proyecto proyecto) {
         boolean result = proyectoService.agregarProyecto(proyecto);
@@ -34,13 +33,11 @@ public class ControladorProyecto {
         }
     }
 
-    // Obtener todos los proyectos
     @GetMapping("/obtener-todas")
     public ResponseEntity<List<Proyecto>> obtenerProyectos() {
         return ResponseEntity.ok(proyectoService.obtenerProyectos());
     }
 
-    // Obtener proyecto por id
     @GetMapping("/obtener/{id}")
     public ResponseEntity<Proyecto> obtenerProyectoById(@PathVariable String id) {
         Optional<Proyecto> proyecto = proyectoService.obtenerProyectoById(id);

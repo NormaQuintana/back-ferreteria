@@ -14,11 +14,11 @@ public class Proyecto {
 @Id
     private String idProyecto = UUID.randomUUID().toString();
     
-@OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
-@JoinColumn(name = "idPersona") // Enlace con Persona
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "idPersona")
     private Persona persona;
 
-@OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
+@OneToOne(cascade = CascadeType.ALL) 
 @JoinColumn(name = "idDireccion")
     private Direccion direccion;
 

@@ -28,7 +28,7 @@ public class ControladorProducto {
         Producto nuevoProducto = productoService.agregarProducto(producto);
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     } catch (RuntimeException e) {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Manejo de errores
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
     }
     }
 

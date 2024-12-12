@@ -15,7 +15,7 @@ public class RolService {
     private RolRepository rolRepository;
 
     public void crearRoles() {
-        if (!rolRepository.existsById(UUID.fromString("d4e9f052-e2d2-4a4c-b225-7a69b0c9d0b3"))) {  // Usando UUID válido
+        if (!rolRepository.existsById(UUID.fromString("d4e9f052-e2d2-4a4c-b225-7a69b0c9d0b3"))) {  
             rolRepository.save(new Rol(UUID.fromString("d4e9f052-e2d2-4a4c-b225-7a69b0c9d0b3"), "Administrador"));
         }
         if (!rolRepository.existsById(UUID.fromString("a56f7c83-2b5f-4019-b73c-9f6f96c25123"))) {

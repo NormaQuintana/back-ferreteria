@@ -13,15 +13,15 @@ public class DireccionService {
     private DireccionRepository direccionRepository;
 
     public Direccion guardarDireccion(Direccion direccion) {
-        return direccionRepository.save(direccion); // Inserta o actualiza
+        return direccionRepository.save(direccion); 
     }
 
     public Optional<Direccion> obtenerDireccionPorId(String id) {
-        return direccionRepository.findById(id); // Busca por ID
+        return direccionRepository.findById(id); 
     }
 
     public void eliminarDireccion(String id) {
-        direccionRepository.deleteById(id); // Elimina por ID
+        direccionRepository.deleteById(id);
     }
 
     public List<Direccion> obtenerTodasLasDirecciones() {
