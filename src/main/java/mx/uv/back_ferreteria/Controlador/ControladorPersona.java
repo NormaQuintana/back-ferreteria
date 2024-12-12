@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 

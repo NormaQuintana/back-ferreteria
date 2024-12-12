@@ -9,7 +9,6 @@ import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Repository.DireccionRepository;
 import mx.uv.back_ferreteria.Repository.PersonaRepository;
-import mx.uv.back_ferreteria.Repository.RolRepository;
 
 @Service
 public class PersonaService {
@@ -19,8 +18,6 @@ public class PersonaService {
     @Autowired
     private DireccionRepository direccionRepository; // Para guardar la dirección
 
-     @Autowired
-    private RolRepository rolRepository; // Repositorio para la entidad Rol
 
     public boolean agregarPersona(Persona persona) {
 

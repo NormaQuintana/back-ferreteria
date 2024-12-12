@@ -50,8 +50,12 @@ public class UsuarioService {
     }
 
     // Obtener usuario por ID (sin cambios)
-    public Usuario obtenerUsuarioById(UUID id) {
+    public Usuario obtenerUsuarioById(String id) {
         return usuarioRepository.findById(id).orElse(null);
+    }
+
+    public List<Usuario> obtenerTodasLosU() {
+        return usuarioRepository.findAll();
     }
 
     @Transactional

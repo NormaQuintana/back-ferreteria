@@ -12,12 +12,12 @@ import org.springframework.data.repository.query.Param;
 import jakarta.transaction.Transactional;
 import mx.uv.back_ferreteria.Modelo.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
+public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
         @Query("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.contrasena = :contrasena")
         Optional<Usuario> validarCredenciales(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
     
-        @Query("SELECT u FROM Usuario u WHERE u.estado = 'Activo'")
+        @Query("SELECT u FROM Usuario u WHERE u.estado = 'Disponible'")
         List<Usuario> findUsuariosActivos();
     
         @Modifying

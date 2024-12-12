@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Usuario;
 import mx.uv.back_ferreteria.Repository.PersonaRepository;
 import mx.uv.back_ferreteria.Repository.UsuarioRepository;
@@ -46,11 +47,6 @@ public class ControladorUsuario {
         return usuarioValidado.isPresent() ? ResponseEntity.ok(usuarioValidado) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
     }
 
-    @GetMapping
-    public ResponseEntity<List<Usuario>> obtenerUsuariosActivos() {
-        return ResponseEntity.ok(usuarioService.obtenerUsuariosActivos());
-    }
-
     @PutMapping("/cambiarContrasena")
     public ResponseEntity<String> cambiarContrasena(@RequestParam String correo, @RequestParam String nuevaContrasena) {
         return ResponseEntity.ok(usuarioService.cambiarContrasena(correo, nuevaContrasena));
@@ -68,6 +64,16 @@ public class ControladorUsuario {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCreado);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-todas")
+    public ResponseEntity<List<Usuario>> obtenerTodasLasPersonas() {
+        List<Usuario> usuarios = usuarioService.obtenerUsuariosActivos();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        } else {
+            return ResponseEntity.ok(usuarios); 
         }
     }
 }

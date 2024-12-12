@@ -14,8 +14,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idUsuario;
+    private String idUsuario = UUID.randomUUID().toString();
 
     @OneToOne(cascade = CascadeType.ALL) // Esto propagará las operaciones de persistencia a Dirección
     @JoinColumn(name = "persona_id") // Enlace con Persona
@@ -58,11 +57,11 @@ public class Usuario {
         this.sueldo = sueldo;
     }
 
-    public UUID getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(UUID idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
