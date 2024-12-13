@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,28 +18,28 @@ import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Servicio.DireccionService;
 
 @RestController
-@RequestMapping("/direcciones")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorDireccion {
      @Autowired
     private DireccionService direccionService;
 
-    @PostMapping("/agregar-direccion")
+    @PostMapping("/direccion/agregar-direccion")
     public ResponseEntity<Direccion> crearDireccion(@RequestBody Direccion direccion) {
         return ResponseEntity.ok(direccionService.guardarDireccion(direccion));
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/direccion/obtener/{id}")
     public ResponseEntity<Optional<Direccion>> obtenerDireccion(@PathVariable String id) {
         return ResponseEntity.ok(direccionService.obtenerDireccionPorId(id));
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/direccion/eliminar/{id}")
     public ResponseEntity<Void> eliminarDireccion(@PathVariable String id) {
         direccionService.eliminarDireccion(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/obtener-todas")
+    @GetMapping("/direccion/obtener-todas")
     public ResponseEntity<List<Direccion>> obtenerTodasLasDirecciones() {
         List<Direccion> direcciones = direccionService.obtenerTodasLasDirecciones();
         

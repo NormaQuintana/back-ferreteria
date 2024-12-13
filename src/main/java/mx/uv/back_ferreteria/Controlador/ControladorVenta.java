@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +15,17 @@ import mx.uv.back_ferreteria.Modelo.Venta;
 import mx.uv.back_ferreteria.Servicio.VentaService;
 
 @RestController
-@RequestMapping("/ventas")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorVenta {
     @Autowired
     private VentaService ventaService;
 
-    @PostMapping("/agregar")
+    @PostMapping("/venta/agregar")
     public ResponseEntity<Venta> agregarVenta(@RequestBody Venta venta) {
         return ResponseEntity.ok(ventaService.agregarVenta(venta));
     }
 
-    @GetMapping("/obtener-diarias")
+    @GetMapping("/venta/obtener-diarias")
     public ResponseEntity<List<Venta>> obtenerTodasLasVentasDiarias() {
         List<Venta> ventas = ventaService.obtenerTodasLasVentasDiarias();
         

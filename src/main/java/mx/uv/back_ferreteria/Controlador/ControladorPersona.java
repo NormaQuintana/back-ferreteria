@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +19,12 @@ import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
-@RequestMapping("/personas")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorPersona {
     @Autowired
     private PersonaService personaService;
 
-    @PostMapping("/agregar")
+    @PostMapping("/persona/agregar")
     public ResponseEntity<String> agregarPersona(@RequestBody Persona persona) {
         boolean result = personaService.agregarPersona(persona);
         if (result) {
@@ -33,7 +34,7 @@ public class ControladorPersona {
         }
     }
 
-    @PutMapping("/editar/{id}")
+    @PutMapping("/persona/editar/{id}")
     public ResponseEntity<String> editarPersona(@PathVariable String id, @RequestBody Persona persona) {
     System.out.println("Persona recibida: " + persona);
     System.out.println("Direccion recibida: " + persona.getDireccion());
@@ -46,7 +47,7 @@ public class ControladorPersona {
         }
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/persona/obtener/{id}")
     public ResponseEntity<Persona> obtenerPersona(@PathVariable String id) {
         Persona persona = personaService.obtenerPersonaById(id);
         if (persona != null) {
@@ -56,7 +57,7 @@ public class ControladorPersona {
         }
     }
 
-    @GetMapping("/obtener-todas")
+    @GetMapping("/persona/obtener-todas")
     public ResponseEntity<List<Persona>> obtenerTodasLasPersonas() {
         List<Persona> personas = personaService.obtenerTodasLasPersonas();
         
@@ -67,7 +68,7 @@ public class ControladorPersona {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/persona/eliminar/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         boolean result = personaService.eliminarPersona(id);
         if (result) {

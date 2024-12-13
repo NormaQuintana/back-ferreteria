@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +20,14 @@ import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
-@RequestMapping("/proveedores")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorProveedor {
 
 
     @Autowired
     private PersonaService personaService;
 
-    @PostMapping("/agregar")
+    @PostMapping("/proveedor/agregar")
     public ResponseEntity<String> agregarProveedor(@RequestBody Persona persona) {
         boolean result = personaService.agregarProveedor(persona);
         if (result) {
@@ -36,7 +37,7 @@ public class ControladorProveedor {
         }
     }
 
-    @PutMapping("/editar/{id}")
+    @PutMapping("/proveedor/editar/{id}")
     public ResponseEntity<String> editarPersona(@RequestBody Persona persona) {
     System.out.println("Proveedor recibida: " + persona);
     System.out.println("Direccion recibida: " + persona.getDireccion());
@@ -49,7 +50,7 @@ public class ControladorProveedor {
         }
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/proveedor/obtener/{id}")
     public ResponseEntity<Persona> obtenerPersona(@PathVariable String id) {
         Persona persona = personaService.obtenerPersonaById(id);
         if (persona != null) {
@@ -59,13 +60,13 @@ public class ControladorProveedor {
         }
     }
 
-    @GetMapping("/obtener-todas")
+    @GetMapping("/proveedor/obtener-todas")
     public List<Persona> obtenerPersonasPorRol() {
     UUID idRolProveedor = UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe");
     return personaService.obtenerPersonasPorIdRol(idRolProveedor);
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/proveedor/eliminar/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         boolean result = personaService.eliminarPersona(id);
         if (result) {

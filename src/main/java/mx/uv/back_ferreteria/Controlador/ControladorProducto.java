@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +18,12 @@ import mx.uv.back_ferreteria.Modelo.Producto;
 import mx.uv.back_ferreteria.Servicio.ProductoService;
 
 @RestController
-@RequestMapping("/productos")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorProducto {
     @Autowired
     private ProductoService productoService;
 
-    @PostMapping("/agregar")
+    @PostMapping("/producto/agregar")
     public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto) {
         try {
         Producto nuevoProducto = productoService.agregarProducto(producto);
@@ -32,7 +33,7 @@ public class ControladorProducto {
     }
     }
 
-    @GetMapping("/obtener-todas")
+    @GetMapping("/producto/obtener-todas")
     public ResponseEntity<List<Producto>> obtenerTodasLosProductosDisponibles() {
         List<Producto> productos = productoService.obtenerProductosDisponibles();
         
@@ -43,7 +44,7 @@ public class ControladorProducto {
         }
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/producto/obtener/{id}")
     public ResponseEntity<Producto> obtenerProducto(@PathVariable String id) {
         Producto producto = productoService.obtenerProductoById(id);
         if (producto != null) {
@@ -53,7 +54,7 @@ public class ControladorProducto {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/producto/eliminar/{id}")
     public ResponseEntity<String> eliminarProducto(@PathVariable String id) {
         boolean result = productoService.eliminarProducto(id);
         if (result) {
