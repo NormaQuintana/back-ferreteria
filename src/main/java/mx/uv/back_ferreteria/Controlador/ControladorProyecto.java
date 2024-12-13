@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,13 @@ import mx.uv.back_ferreteria.Modelo.Proyecto;
 import mx.uv.back_ferreteria.Servicio.ProyectoService;
 
 @RestController
-@RequestMapping("/proyectos")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorProyecto {
 
     @Autowired
     private ProyectoService proyectoService;
 
-    @PostMapping("/agregar")
+    @PostMapping("/proyecto/agregar")
     public ResponseEntity<String> agregarProyecto(@RequestBody Proyecto proyecto) {
         boolean result = proyectoService.agregarProyecto(proyecto);
         if (result) {
@@ -33,12 +34,12 @@ public class ControladorProyecto {
         }
     }
 
-    @GetMapping("/obtener-todas")
+    @GetMapping("/proyecto/obtener-todas")
     public ResponseEntity<List<Proyecto>> obtenerProyectos() {
         return ResponseEntity.ok(proyectoService.obtenerProyectos());
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/proyecto/obtener/{id}")
     public ResponseEntity<Proyecto> obtenerProyectoById(@PathVariable String id) {
         Optional<Proyecto> proyecto = proyectoService.obtenerProyectoById(id);
         if (proyecto.isPresent()) {
@@ -48,7 +49,7 @@ public class ControladorProyecto {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/proyecto/eliminar/{id}")
     public ResponseEntity<String> eliminarProyecto(@PathVariable String id) {
         boolean result = proyectoService.eliminarProyecto(id);
         if (result) {
