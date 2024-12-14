@@ -2,7 +2,6 @@ package mx.uv.back_ferreteria.Controlador;
 
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.uv.back_ferreteria.Modelo.Persona;
+import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
@@ -62,8 +61,8 @@ public class ControladorProveedor {
 
     @GetMapping("/proveedor/obtener-todas")
     public List<Persona> obtenerPersonasPorRol() {
-    UUID idRolProveedor = UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe");
-    return personaService.obtenerPersonasPorIdRol(idRolProveedor);
+    Rol rol = new Rol ("9f7b755f-e3bb-485a-a31b-14987f91d9fe", "Proveedor");
+    return personaService.obtenerPersonasPorIdRol(rol);
     }
 
     @DeleteMapping("/proveedor/eliminar/{id}")

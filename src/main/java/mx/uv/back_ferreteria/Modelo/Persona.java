@@ -20,7 +20,10 @@ public class Persona {
     private String correo;
     private String rfc;
     private String estado;
-    private UUID idRol;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "direccion_id") 
@@ -92,12 +95,12 @@ public class Persona {
         this.rfc = rfc;
     }
 
-    public UUID getIdRol() {
-        return idRol;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setIdRol(UUID idRol) {
-        this.idRol = idRol;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public String getEstado() {

@@ -9,10 +9,10 @@ import jakarta.persistence.Id;
 public class Direccion {
     @Id
     private String id = UUID.randomUUID().toString();
-    private String ciudad;
-    private String colonia;
     private String calle;
     private String numero;
+    private String colonia;
+    private String ciudad;
 
     public Direccion(){
 
