@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
+import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Repository.DireccionRepository;
 import mx.uv.back_ferreteria.Repository.PersonaRepository;
 
@@ -27,10 +28,12 @@ public class PersonaService {
             return false; 
         }
 
+        Rol rol = persona.getRol();
         Direccion direccion = persona.getDireccion(); 
         direccionRepository.save(direccion); 
 
         persona.setDireccion(direccion);
+        persona.setRol(rol);
         persona.setEstado("Disponible");
         personaRepository.save(persona);
         return true;
@@ -82,19 +85,20 @@ public class PersonaService {
             return false; 
         }
 
-        persona.setIdRol(UUID.fromString("9f7b755f-e3bb-485a-a31b-14987f91d9fe")); 
+        Rol rol = persona.getRol();
 
         Direccion direccion = persona.getDireccion(); 
         direccionRepository.save(direccion); 
 
         persona.setDireccion(direccion);
+        persona.setRol(rol);
         persona.setEstado("Disponible");
 
         personaRepository.save(persona);
         return true; 
     }
 
-    public List<Persona> obtenerPersonasPorIdRol(UUID idRol) {
-        return personaRepository.findByIdRol(idRol);
+    public List<Persona> obtenerPersonasPorIdRol(Rol rol) {
+        return personaRepository.findByRol(rol);
     }
 }

@@ -11,17 +11,23 @@ import jakarta.persistence.Id;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id = UUID.randomUUID().toString();
     private String nombre;
+    
 
-    public Rol(UUID uuid, String string) {
+    public Rol() {}
+    
+    public Rol(String id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
-    public UUID getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

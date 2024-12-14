@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uv.back_ferreteria.Modelo.Persona;
+import mx.uv.back_ferreteria.ResponseMessage;
+
 import mx.uv.back_ferreteria.Modelo.Usuario;
 import mx.uv.back_ferreteria.Servicio.UsuarioService;
 
@@ -60,8 +60,9 @@ public class ControladorUsuario {
     @PostMapping("/usuario/agregar")
     public ResponseEntity<?> agregarUsuario(@RequestBody Usuario usuario) {
         try {
-            Usuario usuarioCreado = usuarioService.crearUsuario(usuario);
-            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCreado);
+            
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Usuario agregado exitosamente"));
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
