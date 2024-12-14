@@ -59,7 +59,7 @@ public class ControladorUsuario {
     @PostMapping("/usuario/agregar")
     public ResponseEntity<?> agregarUsuario(@RequestBody Usuario usuario) {
         try {
-            Usuario usuarioCreado = usuarioService.crearUsuario(usuario);
+            
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Usuario agregado exitosamente"));
 
         } catch (Exception e) {
