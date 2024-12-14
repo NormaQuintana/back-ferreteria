@@ -31,8 +31,8 @@ public class UsuarioService {
         return usuarioRepository.validarCredenciales(usuario, contrasena);
     }
 
-    public List<Usuario> obtenerUsuariosActivos() {
-        return usuarioRepository.findUsuariosActivos();
+    public List<Usuario> obtenerUsuariosDisponibles() {
+        return usuarioRepository.findUsuariosDisponibles();
     }
 
     public String cambiarContrasena(String correo, String nuevaContrasena) {
@@ -48,8 +48,8 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElse(null);
     }
 
-    public List<Usuario> obtenerTodasLosU() {
-        return usuarioRepository.findAll();
+    public List<Usuario> obtenerTodasLosUsuarios() {
+        return usuarioRepository.findAllWithPersonaAndRol();
     }
 
     @Transactional

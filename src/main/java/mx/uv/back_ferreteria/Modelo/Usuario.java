@@ -14,14 +14,15 @@ public class Usuario {
     @Id
     private String idUsuario = UUID.randomUUID().toString();
 
-    @OneToOne(cascade = CascadeType.ALL) 
-    @JoinColumn(name = "persona_id") 
-    private Persona persona;
-
     private String usuario;
     private String contrasena;
     private String sueldo;
     private String estado;
+    
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "persona_id") 
+    private Persona persona;
+
 
     public String getUsuario() {
         return usuario;

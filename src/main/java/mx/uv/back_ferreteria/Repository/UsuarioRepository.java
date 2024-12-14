@@ -17,7 +17,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
         Optional<Usuario> validarCredenciales(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
     
         @Query("SELECT u FROM Usuario u WHERE u.estado = 'Disponible'")
-        List<Usuario> findUsuariosActivos();
+        List<Usuario> findUsuariosDisponibles();
     
         @Modifying
         @Transactional
@@ -28,5 +28,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
         @Transactional
         @Query("UPDATE Usuario u SET u.estado = 'Inactivo' WHERE u.idUsuario = :idUsuario")
         int eliminarUsuario(@Param("idUsuario") String idUsuario);
+
+        @Query("SELECT u FROM Usuario u JOIN FETCH u.persona p JOIN FETCH p.rol")
+        List<Usuario> findAllWithPersonaAndRol();
     
 }
