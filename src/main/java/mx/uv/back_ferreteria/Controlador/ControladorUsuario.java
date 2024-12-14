@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.uv.back_ferreteria.ResponseMessage;
+
+import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Usuario;
 import mx.uv.back_ferreteria.Servicio.UsuarioService;
 
