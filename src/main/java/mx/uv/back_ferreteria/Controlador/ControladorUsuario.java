@@ -79,12 +79,9 @@ public class ControladorUsuario {
 
     @GetMapping("/usuario/obtener-todas")
     public ResponseEntity<?> obtenerTodasLasPersonas() {
-        //List<Usuario> usuarios = usuarioService.obtenerUsuariosActivos();
         try {
-        // Obtén la lista de usuarios desde la base de datos
         List<Usuario> usuarios = usuarioService.obtenerTodasLosUsuarios();
         List<Usuario> usuariosDisponibles = usuarioService.obtenerUsuariosDisponibles();
-        // Mapea los usuarios para devolver solo los datos requeridos
         List<Map<String, Object>> usuariosMapeados = usuarios.stream().map(usuario -> {
             Map<String, Object> personaMap = new HashMap<>();
             personaMap.put("nombre", usuario.getPersona().getNombre());
@@ -104,8 +101,6 @@ public class ControladorUsuario {
             usuarioMap.put("estado", usuario.getEstado());
             usuarioMap.put("sueldo", usuario.getSueldo());
             usuarioMap.put("persona", personaMap);
-
-            //usuarioMap.put("Disponible", "Disponible".equalsIgnoreCase(usuario.getEstado()));
 
             return usuarioMap;
         }).collect(Collectors.toList());
