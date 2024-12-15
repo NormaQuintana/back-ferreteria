@@ -55,9 +55,14 @@ public class ControladorUsuario {
         return ResponseEntity.ok(usuarioService.cambiarContrasena(correo, nuevaContrasena));
     }
 
-    @DeleteMapping("/usuario/eliminar/{id}")
+    @PutMapping("/usuario/eliminar/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable String id) {
-        return usuarioService.eliminarUsuario(id) ? ResponseEntity.ok("Usuario eliminado") : ResponseEntity.badRequest().body("Error al eliminar usuario");
+        boolean eliminado = usuarioService.eliminarUsuario(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Usuario eliminado");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
     }
 
     @PostMapping("/usuario/agregar")
@@ -94,11 +99,13 @@ public class ControladorUsuario {
             personaMap.put("rol", rolMap);
 
             Map<String, Object> usuarioMap = new HashMap<>();
+            usuarioMap.put("idUsuario", usuario.getIdUsuario());
             usuarioMap.put("usuario", usuario.getUsuario());
+            usuarioMap.put("estado", usuario.getEstado());
             usuarioMap.put("sueldo", usuario.getSueldo());
             usuarioMap.put("persona", personaMap);
 
-            usuarioMap.put("Disponible", "Disponible".equalsIgnoreCase(usuario.getEstado()));
+            //usuarioMap.put("Disponible", "Disponible".equalsIgnoreCase(usuario.getEstado()));
 
             return usuarioMap;
         }).collect(Collectors.toList());
