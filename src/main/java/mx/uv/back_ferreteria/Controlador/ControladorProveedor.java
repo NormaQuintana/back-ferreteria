@@ -114,7 +114,7 @@ public class ControladorProveedor {
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         boolean result = personaService.eliminarPersona(id);
         if (result) {
-            return ResponseEntity.ok("Persona eliminada con éxito.");
+            return ResponseEntity.ok("Proveedor eliminada con éxito.");
         } else {
             return ResponseEntity.status(404).body("Error: Persona no encontrada.");
         }
