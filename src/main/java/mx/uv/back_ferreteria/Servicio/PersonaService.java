@@ -87,16 +87,17 @@ public class PersonaService {
         if (personaRepository.existsByNombreAndCorreoAndRfc(persona.getNombre(), persona.getCorreo(), persona.getRfc())) {
             return false; 
         }
-
-        Rol rol = rolRepository.findByNombre("Provvedor");
-
-        Direccion direccion = persona.getDireccion(); 
-        direccionRepository.save(direccion); 
-
+    
+        Rol rolProveedor = rolRepository.findByNombre("Proveedor")
+                .orElseThrow(() -> new RuntimeException("Rol 'Proveedor' no encontrado"));
+    
+        Direccion direccion = persona.getDireccion();
+        direccionRepository.save(direccion);
+    
         persona.setDireccion(direccion);
-        persona.setRol(rol);
+        persona.setRol(rolProveedor);
         persona.setEstado("Disponible");
-
+    
         personaRepository.save(persona);
         return true; 
     }
