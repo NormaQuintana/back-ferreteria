@@ -1,7 +1,6 @@
 package mx.uv.back_ferreteria.Servicio;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Repository.DireccionRepository;
 import mx.uv.back_ferreteria.Repository.PersonaRepository;
+import mx.uv.back_ferreteria.Repository.RolRepository;
 
 @Service
 public class PersonaService {
@@ -19,6 +19,9 @@ public class PersonaService {
 
     @Autowired
     private DireccionRepository direccionRepository; 
+
+    @Autowired
+    private RolRepository rolRepository; 
 
 
 
@@ -85,7 +88,7 @@ public class PersonaService {
             return false; 
         }
 
-        Rol rol = persona.getRol();
+        Rol rol = rolRepository.findByNombre("Provvedor");
 
         Direccion direccion = persona.getDireccion(); 
         direccionRepository.save(direccion); 
