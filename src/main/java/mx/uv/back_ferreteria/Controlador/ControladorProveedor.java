@@ -4,6 +4,7 @@ package mx.uv.back_ferreteria.Controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import mx.uv.back_ferreteria.ResponseMessage;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
@@ -27,12 +29,16 @@ public class ControladorProveedor {
     private PersonaService personaService;
 
     @PostMapping("/proveedor/agregar")
-    public ResponseEntity<String> agregarProveedor(@RequestBody Persona persona) {
-        boolean result = personaService.agregarProveedor(persona);
-        if (result) {
-            return ResponseEntity.ok("Proveedor agregado con éxito.");
-        } else {
-            return ResponseEntity.status(400).body("Error: Proveedor ya existe.");
+    public ResponseEntity<?> agregarProveedor(@RequestBody Persona persona) {
+        try {
+            boolean result = personaService.agregarProveedor(persona);
+            if (result) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Proveedor registrado correctamente"));
+            } else {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("El proveedor ya se encuentra en existencia");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error al crear el proveedor");
         }
     }
 

@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Repository.RolRepository;
 
 @Service
@@ -32,7 +31,4 @@ public class RolService {
         }
     }
 
-    public Rol obtenerRolPorNombre(String nombre) {
-        return rolRepository.findByNombre(nombre).orElse(null); 
-    }
 }
