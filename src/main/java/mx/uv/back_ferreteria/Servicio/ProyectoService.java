@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Proyecto;
@@ -57,6 +58,16 @@ public class ProyectoService {
 
     public Optional<Proyecto> obtenerProyectoById(String idProyecto) {
         return proyectoRepository.findById(idProyecto);
+    }
+
+    public Proyecto actualizarProyecto(Proyecto proyecto) {
+        // Verificar si el proyecto existe en la base de datos
+        if (!proyectoRepository.existsById(proyecto.getIdProyecto())) {
+            throw new EntityNotFoundException("Proyecto no encontrado.");
+        }
+        
+        // Guardar los cambios en el proyecto
+        return proyectoRepository.save(proyecto);
     }
 
     public boolean eliminarProyecto(String idProyecto) {
