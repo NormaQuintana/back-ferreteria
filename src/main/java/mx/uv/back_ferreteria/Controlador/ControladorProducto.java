@@ -37,11 +37,9 @@ public class ControladorProducto {
     @PostMapping("/producto/agregar")
     public ResponseEntity<?> agregarProducto(@RequestBody Producto producto) {
         if (producto.getPersona() != null && producto.getPersona().getId() != null) {
-        // Buscar la persona completa en la base de datos
         Persona persona = personaRepository.findById(producto.getPersona().getId())
             .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
 
-        // Asociar la persona encontrada al producto
         producto.setPersona(persona);
     }
         productoRepository.save(producto);
