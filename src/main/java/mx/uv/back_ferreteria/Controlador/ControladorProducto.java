@@ -1,6 +1,7 @@
 package mx.uv.back_ferreteria.Controlador;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,10 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
+
+import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Producto;
+import mx.uv.back_ferreteria.Repository.PersonaRepository;
+import mx.uv.back_ferreteria.Repository.ProductoRepository;
 import mx.uv.back_ferreteria.Servicio.ProductoService;
 
 @RestController
@@ -23,14 +28,22 @@ public class ControladorProducto {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
+
     @PostMapping("/producto/agregar")
-    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto) {
-        try {
-        Producto nuevoProducto = productoService.agregarProducto(producto);
-        return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
-    } catch (RuntimeException e) {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+    public ResponseEntity<?> agregarProducto(@RequestBody Producto producto) {
+        if (producto.getPersona() != null && producto.getPersona().getId() != null) {
+        Persona persona = personaRepository.findById(producto.getPersona().getId())
+            .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
+
+        producto.setPersona(persona);
     }
+        productoRepository.save(producto);
+        return ResponseEntity.ok(Map.of("message", "Producto registrado correctamente"));
     }
 
     @GetMapping("/producto/obtener-todas")

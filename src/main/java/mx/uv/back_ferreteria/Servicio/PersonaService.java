@@ -1,16 +1,17 @@
 package mx.uv.back_ferreteria.Servicio;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Repository.DireccionRepository;
 import mx.uv.back_ferreteria.Repository.PersonaRepository;
+import mx.uv.back_ferreteria.Repository.RolRepository;
 
 @Service
 public class PersonaService {
@@ -19,6 +20,9 @@ public class PersonaService {
 
     @Autowired
     private DireccionRepository direccionRepository; 
+
+    @Autowired
+    private RolRepository rolRepository; 
 
 
 
@@ -84,21 +88,30 @@ public class PersonaService {
         if (personaRepository.existsByNombreAndCorreoAndRfc(persona.getNombre(), persona.getCorreo(), persona.getRfc())) {
             return false; 
         }
-
-        Rol rol = persona.getRol();
-
-        Direccion direccion = persona.getDireccion(); 
-        direccionRepository.save(direccion); 
-
+    
+        Rol rolProveedor = rolRepository.findByNombre("Proveedor")
+                .orElseThrow(() -> new RuntimeException("Rol 'Proveedor' no encontrado"));
+    
+        Direccion direccion = persona.getDireccion();
+        direccionRepository.save(direccion);
+    
         persona.setDireccion(direccion);
-        persona.setRol(rol);
+        persona.setRol(rolProveedor);
         persona.setEstado("Disponible");
-
+    
         personaRepository.save(persona);
         return true; 
     }
 
     public List<Persona> obtenerPersonasPorIdRol(Rol rol) {
         return personaRepository.findByRol(rol);
+    }
+
+    public Persona actualizarPersona(Persona persona) {
+        if (!personaRepository.existsById(persona.getIdPersona())) {
+            throw new EntityNotFoundException("Proyecto no encontrado.");
+        }
+        
+        return personaRepository.save(persona);
     }
 }

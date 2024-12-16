@@ -1,6 +1,6 @@
 package mx.uv.back_ferreteria.Modelo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
@@ -22,7 +22,7 @@ public class Proyecto {
 @JoinColumn(name = "idDireccion")
     private Direccion direccion;
 
-    private Date fecha;
+    private LocalDate fecha;
     private String descripcion;
     private String estado;
     
@@ -53,11 +53,11 @@ public class Proyecto {
             this.direccion = direccion;
         }
     
-        public Date getFecha() {
+        public LocalDate getFecha() {
             return fecha;
         }
     
-        public void setFecha(Date fecha) {
+        public void setFecha(LocalDate fecha) {
             this.fecha = fecha;
         }
     

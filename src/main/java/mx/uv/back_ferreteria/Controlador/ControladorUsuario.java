@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,40 +92,35 @@ public class ControladorUsuario {
     @GetMapping("/usuario/obtener-todas")
     public ResponseEntity<?> obtenerTodasLasPersonas() {
         try {
-            List<Usuario> usuarios = usuarioService.obtenerTodasLosUsuarios();
-    
-            List<Map<String, Object>> usuariosMapeados = usuarios.stream().map(usuario -> {
-                Map<String, Object> personaMap = new HashMap<>();
-                personaMap.put("nombre", usuario.getPersona().getNombre());
-                personaMap.put("telefono", usuario.getPersona().getTelefono());
-                personaMap.put("correo", usuario.getPersona().getCorreo());
-                personaMap.put("rfc", usuario.getPersona().getRfc());
-    
-                Map<String, Object> rolMap = new HashMap<>();
-                if (usuario.getRol() != null) {
-                    rolMap.put("id", usuario.getRol().getId());
-                    rolMap.put("nombre", usuario.getRol().getNombre());
-                } else {
-                    rolMap.put("id", null);
-                    rolMap.put("nombre", "Sin Rol");
-                }
-    
-                personaMap.put("rol", rolMap);
-    
-                Map<String, Object> usuarioMap = new HashMap<>();
-                usuarioMap.put("idUsuario", usuario.getIdUsuario());
-                usuarioMap.put("usuario", usuario.getUsuario());
-                usuarioMap.put("estado", usuario.getEstado());
-                usuarioMap.put("sueldo", usuario.getSueldo());
-                usuarioMap.put("persona", personaMap);
-    
-                return usuarioMap;
-            }).collect(Collectors.toList());
-    
-            return ResponseEntity.ok(usuariosMapeados);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        List<Usuario> usuarios = usuarioService.obtenerTodasLosUsuarios();
+        List<Usuario> usuariosDisponibles = usuarioService.obtenerUsuariosDisponibles();
+        List<Map<String, Object>> usuariosMapeados = usuarios.stream().map(usuario -> {
+            Map<String, Object> personaMap = new HashMap<>();
+            personaMap.put("nombre", usuario.getPersona().getNombre());
+            personaMap.put("telefono", usuario.getPersona().getTelefono());
+            personaMap.put("correo", usuario.getPersona().getCorreo());
+            personaMap.put("rfc", usuario.getPersona().getRfc());
+
+            Map<String, Object> rolMap = new HashMap<>();
+            rolMap.put("id", usuario.getPersona().getRol().getId());
+            rolMap.put("nombre", usuario.getPersona().getRol().getNombre());
+
+            personaMap.put("rol", rolMap);
+
+            Map<String, Object> usuarioMap = new HashMap<>();
+            usuarioMap.put("idUsuario", usuario.getIdUsuario());
+            usuarioMap.put("usuario", usuario.getUsuario());
+            usuarioMap.put("estado", usuario.getEstado());
+            usuarioMap.put("sueldo", usuario.getSueldo());
+            usuarioMap.put("persona", personaMap);
+
+            return usuarioMap;
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(usuariosMapeados);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
     }
     
 }
