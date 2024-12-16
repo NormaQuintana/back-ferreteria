@@ -3,6 +3,7 @@ package mx.uv.back_ferreteria.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +14,7 @@ import mx.uv.back_ferreteria.Modelo.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
+       @EntityGraph(attributePaths = {"persona", "persona.rol"})
         @Query("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.contrasena = :contrasena")
         Optional<Usuario> validarCredenciales(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
     
