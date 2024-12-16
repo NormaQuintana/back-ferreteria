@@ -108,12 +108,10 @@ public class PersonaService {
     }
 
     public Persona actualizarPersona(Persona persona) {
-        // Verificar si el proyecto existe en la base de datos
         if (!personaRepository.existsById(persona.getIdPersona())) {
             throw new EntityNotFoundException("Proyecto no encontrado.");
         }
         
-        // Guardar los cambios en el proyecto
         return personaRepository.save(persona);
     }
 }

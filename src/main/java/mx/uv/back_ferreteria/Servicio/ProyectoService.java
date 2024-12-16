@@ -61,12 +61,10 @@ public class ProyectoService {
     }
 
     public Proyecto actualizarProyecto(Proyecto proyecto) {
-        // Verificar si el proyecto existe en la base de datos
         if (!proyectoRepository.existsById(proyecto.getIdProyecto())) {
             throw new EntityNotFoundException("Proyecto no encontrado.");
         }
         
-        // Guardar los cambios en el proyecto
         return proyectoRepository.save(proyecto);
     }
 
