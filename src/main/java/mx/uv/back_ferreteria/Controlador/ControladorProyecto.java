@@ -122,28 +122,23 @@ public class ControladorProyecto {
     @DeleteMapping("/proyecto/eliminar/{id}")
     public ResponseEntity<String> eliminarProyecto(@PathVariable String id) {
         try {
-            // Obtener el proyecto por ID usando el método 'obtenerProyectoById'
             Optional<Proyecto> optionalProyecto = proyectoService.obtenerProyectoById(id);
             
-            // Verificar si el proyecto existe
             if (optionalProyecto.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Proyecto no encontrado.");
             }
             
             Proyecto proyecto = optionalProyecto.get();
             
-            // Cambiar el estado del proyecto a "Inactivo"
             proyecto.setEstado("Inactivo");
             
-            // Cambiar el estado de la persona asociada a "Inactivo" (si existe)
             Persona persona = proyecto.getPersona();
             if (persona != null) {
                 persona.setEstado("Inactivo");
-                personaService.actualizarPersona(persona); // Actualiza la persona en la base de datos
+                personaService.actualizarPersona(persona);
             }
 
-            // Actualizar el proyecto en la base de datos
-            proyectoService.actualizarProyecto(proyecto); // Actualiza el proyecto en la base de datos
+            proyectoService.actualizarProyecto(proyecto); 
 
             return ResponseEntity.ok("Proyecto y persona actualizados a Inactivo con éxito.");
         } catch (Exception e) {
