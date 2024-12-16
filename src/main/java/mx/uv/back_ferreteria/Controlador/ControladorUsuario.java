@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.Cookie;
+
+import jakarta.servlet.http.HttpServletResponse;
 import mx.uv.back_ferreteria.ResponseMessage;
 
 import mx.uv.back_ferreteria.Modelo.Usuario;
@@ -27,6 +30,7 @@ import mx.uv.back_ferreteria.Servicio.UsuarioService;
 @RestController
 @CrossOrigin(origins = "http://localhost:7890")
 public class ControladorUsuario {
+
 
     @Autowired
     private final UsuarioService usuarioService;
@@ -37,18 +41,26 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/validar")
-    public ResponseEntity<?> validarCredenciales(@RequestParam String usuario, @RequestParam String contrasena) {
-        System.out.println("Usuario recibido: " + usuario);
-    System.out.println("Contraseña recibida: " + contrasena);
+    public ResponseEntity<?> validarCredenciales(@RequestParam String usuario, @RequestParam String contrasena, HttpServletResponse response) {
+        Optional<Usuario> usuarioOpt = usuarioService.validarCredenciales(usuario, contrasena);
 
-    Optional<Usuario> usuarioOpt = usuarioService.validarCredenciales(usuario, contrasena);
+        if (usuarioOpt.isPresent()) {
+            Usuario usuarioAutenticado = usuarioOpt.get();
+            String rol = usuarioAutenticado.getPersona().getRol().getNombre();
+            
+            Cookie rolCookie = new Cookie("rol", rol);
+            rolCookie.setPath("/");
+            //rolCookie.setHttpOnly(true); 
+            rolCookie.setMaxAge(60 * 60 * 24);
+            
+            response.addCookie(rolCookie);
 
-    if (usuarioOpt.isPresent()) {
-        return ResponseEntity.ok("Usuario autenticado");
-    } else {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario o contraseña incorrectos");
+            return ResponseEntity.ok("Usuario autenticado");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario o contraseña incorrectos");
+        }
     }
-    }
+
 
     @PutMapping("/cambiarContrasena")
     public ResponseEntity<String> cambiarContrasena(@RequestParam String correo, @RequestParam String nuevaContrasena) {
@@ -110,4 +122,5 @@ public class ControladorUsuario {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
     }
+    
 }

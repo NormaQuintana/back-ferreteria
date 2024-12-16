@@ -1,12 +1,12 @@
 package mx.uv.back_ferreteria.Modelo;
 
-
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -18,26 +18,31 @@ public class Usuario {
     private String contrasena;
     private String sueldo;
     private String estado;
-    
+
     @OneToOne(cascade = CascadeType.ALL) 
     @JoinColumn(name = "persona_id") 
     private Persona persona;
 
+    @ManyToOne
+    @JoinColumn(name = "rol_id") 
+    private Rol rol;
+
+    // Getters y Setters
 
     public String getUsuario() {
         return usuario;
     }
 
-    public void setUser(String usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    public String getPassword() {
+    public String getContrasena() {
         return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.contrasena = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public Persona getPersona() {
@@ -46,6 +51,14 @@ public class Usuario {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public String getSueldo() {
@@ -62,18 +75,6 @@ public class Usuario {
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public String getEstado() {
