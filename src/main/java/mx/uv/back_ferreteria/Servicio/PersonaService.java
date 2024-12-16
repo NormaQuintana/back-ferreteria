@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
@@ -104,5 +105,15 @@ public class PersonaService {
 
     public List<Persona> obtenerPersonasPorIdRol(Rol rol) {
         return personaRepository.findByRol(rol);
+    }
+
+    public Persona actualizarPersona(Persona persona) {
+        // Verificar si el proyecto existe en la base de datos
+        if (!personaRepository.existsById(persona.getIdPersona())) {
+            throw new EntityNotFoundException("Proyecto no encontrado.");
+        }
+        
+        // Guardar los cambios en el proyecto
+        return personaRepository.save(persona);
     }
 }
