@@ -27,8 +27,8 @@ import mx.uv.back_ferreteria.ResponseMessage;
 import mx.uv.back_ferreteria.Modelo.Usuario;
 import mx.uv.back_ferreteria.Servicio.UsuarioService;
 
+@CrossOrigin
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorUsuario {
 
 
