@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uv.back_ferreteria.ResponseMessage;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
-import mx.uv.back_ferreteria.Repository.RolRepository;
+//import mx.uv.back_ferreteria.Repository.RolRepository;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 @CrossOrigin
 @RestController
@@ -30,7 +30,7 @@ public class ControladorProveedor {
     private PersonaService personaService;
 
     @Autowired
-    private RolRepository rolRepository;
+   // private RolRepository rolRepository;
 
     @PostMapping("/proveedor/agregar")
     public ResponseEntity<?> agregarProveedor(@RequestBody Persona persona) {
