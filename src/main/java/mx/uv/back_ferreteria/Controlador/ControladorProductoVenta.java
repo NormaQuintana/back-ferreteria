@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uv.back_ferreteria.Modelo.ProductoVenta;
 import mx.uv.back_ferreteria.Servicio.ProductoVentaService;
 
+@CrossOrigin
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorProductoVenta {
 
     @Autowired

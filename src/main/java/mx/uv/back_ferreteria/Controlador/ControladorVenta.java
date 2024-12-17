@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uv.back_ferreteria.Modelo.Venta;
 import mx.uv.back_ferreteria.Servicio.VentaService;
 
+@CrossOrigin
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorVenta {
     @Autowired
     private VentaService ventaService;

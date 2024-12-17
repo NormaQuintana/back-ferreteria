@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Servicio.DireccionService;
 
+@CrossOrigin
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorDireccion {
      @Autowired
     private DireccionService direccionService;
