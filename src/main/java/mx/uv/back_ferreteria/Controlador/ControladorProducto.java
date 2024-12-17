@@ -24,7 +24,7 @@ import mx.uv.back_ferreteria.Repository.ProductoRepository;
 import mx.uv.back_ferreteria.Servicio.ProductoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorProducto {
     @Autowired
     private ProductoService productoService;

@@ -19,7 +19,7 @@ import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorPersona {
     @Autowired
     private PersonaService personaService;

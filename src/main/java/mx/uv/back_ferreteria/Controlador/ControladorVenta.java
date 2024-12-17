@@ -15,7 +15,7 @@ import mx.uv.back_ferreteria.Modelo.Venta;
 import mx.uv.back_ferreteria.Servicio.VentaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorVenta {
     @Autowired
     private VentaService ventaService;

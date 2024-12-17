@@ -24,7 +24,7 @@ import mx.uv.back_ferreteria.Servicio.PersonaService;
 import mx.uv.back_ferreteria.Servicio.ProyectoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorProyecto {
 
     @Autowired
