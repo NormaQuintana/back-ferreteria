@@ -60,4 +60,8 @@ public class ProductoService {
         productoRepository.save(producto);
         return true;
     }
+
+    public void save(Producto producto) {
+        productoRepository.save(producto);
+    }
 }
