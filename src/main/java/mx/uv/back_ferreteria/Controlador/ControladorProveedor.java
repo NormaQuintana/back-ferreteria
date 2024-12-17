@@ -25,7 +25,7 @@ import mx.uv.back_ferreteria.Repository.RolRepository;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:7890")
+@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorProveedor {
 
 
