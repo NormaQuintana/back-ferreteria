@@ -18,7 +18,7 @@ import mx.uv.back_ferreteria.Modelo.Direccion;
 import mx.uv.back_ferreteria.Servicio.DireccionService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:7890")
 public class ControladorDireccion {
      @Autowired
     private DireccionService direccionService;
