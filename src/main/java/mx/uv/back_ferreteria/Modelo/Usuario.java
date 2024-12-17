@@ -1,7 +1,5 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.util.UUID;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,9 +24,6 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "rol_id") 
     private Rol rol;
-
-    // Getters y Setters
-
     public String getUsuario() {
         return usuario;
     }

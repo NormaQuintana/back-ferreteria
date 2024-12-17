@@ -1,13 +1,10 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.util.UUID;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-
 @Entity 
 public class Producto {
     @Id

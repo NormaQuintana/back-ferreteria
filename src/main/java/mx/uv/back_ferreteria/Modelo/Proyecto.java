@@ -1,8 +1,6 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.time.LocalDate;
-import java.util.UUID;
-
+import java.util.UUID; //Impr
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -78,3 +76,4 @@ public class Proyecto {
             this.estado = estado;
         }
 }
+/**/ 

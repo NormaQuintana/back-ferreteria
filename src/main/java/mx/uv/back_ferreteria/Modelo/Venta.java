@@ -1,10 +1,7 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

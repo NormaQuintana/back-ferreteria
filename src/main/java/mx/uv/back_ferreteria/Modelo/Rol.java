@@ -1,7 +1,5 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

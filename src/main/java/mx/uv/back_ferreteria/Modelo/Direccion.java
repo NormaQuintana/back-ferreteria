@@ -1,10 +1,7 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
 @Entity
 public class Direccion {
     @Id
@@ -15,7 +12,6 @@ public class Direccion {
     private String ciudad;
 
     public Direccion(){
-
     }
 
     public Direccion(String id, String ciudad, String colonia, String calle, String numero) {

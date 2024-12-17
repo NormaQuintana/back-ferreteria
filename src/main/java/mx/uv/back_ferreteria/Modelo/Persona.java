@@ -1,30 +1,27 @@
 package mx.uv.back_ferreteria.Modelo;
-
 import java.util.UUID;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-
 @Entity
 public class Persona {
     @Id
     private String id = UUID.randomUUID().toString();
     private String id_persona = id;
-    
     private String nombre;
     private String telefono;
     private String correo;
     private String rfc;
     private String estado;
 
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_rol")
     private Rol rol;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "direccion_id") 
     private Direccion direccion;
@@ -32,6 +29,8 @@ public class Persona {
     public Persona() {
     }
 
+
+    
     @PrePersist
     public void prePersist() {
         if (this.id == null) {
