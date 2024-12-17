@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
 
+@CrossOrigin
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
 public class ControladorPersona {
     @Autowired
     private PersonaService personaService;
