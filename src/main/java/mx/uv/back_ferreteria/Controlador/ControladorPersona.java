@@ -23,12 +23,11 @@ import mx.uv.back_ferreteria.Servicio.PersonaService;
 public class ControladorPersona {
     @Autowired
     private PersonaService personaService;
-
     @PostMapping("/persona/agregar")
     public ResponseEntity<String> agregarPersona(@RequestBody Persona persona) {
         boolean result = personaService.agregarPersona(persona);
         if (result) {
-            return ResponseEntity.ok("Persona agregada con éxito.");
+            return ResponseEntity.ok("Persona agregada correctamente.");
         } else {
             return ResponseEntity.status(400).body("Error: Persona ya existe.");
         }
