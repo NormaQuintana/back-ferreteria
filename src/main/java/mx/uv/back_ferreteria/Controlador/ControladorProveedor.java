@@ -17,17 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import mx.uv.back_ferreteria.ResponseMessage;
 import mx.uv.back_ferreteria.Modelo.Persona;
 import mx.uv.back_ferreteria.Modelo.Rol;
 import mx.uv.back_ferreteria.Repository.RolRepository;
 import mx.uv.back_ferreteria.Servicio.PersonaService;
-
 @CrossOrigin
 @RestController
 public class ControladorProveedor {
-
 
     @Autowired
     private PersonaService personaService;

@@ -30,8 +30,6 @@ import mx.uv.back_ferreteria.Servicio.UsuarioService;
 @CrossOrigin
 @RestController
 public class ControladorUsuario {
-
-
     @Autowired
     private final UsuarioService usuarioService;
 
@@ -39,7 +37,6 @@ public class ControladorUsuario {
     public ControladorUsuario(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
-
     @PostMapping("/validar")
     public ResponseEntity<?> validarCredenciales(@RequestParam String usuario, @RequestParam String contrasena, HttpServletResponse response) {
         Optional<Usuario> usuarioOpt = usuarioService.validarCredenciales(usuario, contrasena);
@@ -61,12 +58,10 @@ public class ControladorUsuario {
         }
     }
 
-
     @PutMapping("/cambiarContrasena")
     public ResponseEntity<String> cambiarContrasena(@RequestParam String correo, @RequestParam String nuevaContrasena) {
         return ResponseEntity.ok(usuarioService.cambiarContrasena(correo, nuevaContrasena));
     }
-
     @PutMapping("/usuario/eliminar/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable String id) {
         boolean eliminado = usuarioService.eliminarUsuario(id);
@@ -76,7 +71,6 @@ public class ControladorUsuario {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
         }
     }
-
     @PostMapping("/usuario/agregar")
     public ResponseEntity<?> agregarUsuario(@RequestBody Usuario usuario) {
         try {
